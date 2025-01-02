@@ -24,10 +24,17 @@
         devShells.default = pkgs.mkShell (with pkgs; {
           packages = [
             bashInteractive
-            (rust-bin.nightly.latest.default.override {
+            # Need to use gcc11 for CUDA compatibility purposes.
+            gcc11 # Specify gcc11 instead of default gcc
+            (rust-bin.stable.latest.default.override {
               extensions = ["rust-src"];
             })
           ];
+          shellHook = ''
+            export CC=${pkgs.gcc11}/bin/gcc
+            export CXX=${pkgs.gcc11}/bin/g++
+            export PATH=${pkgs.gcc11}/bin:$PATH
+          '';
         });
       }
     );

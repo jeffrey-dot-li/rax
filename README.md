@@ -22,6 +22,7 @@ Here is the 7b model running on an A10 GPU:
 2. Activate git lfs with `git lfs install`.
 3. Run the following commands to download the model weights in pytorch format (~25 GB):
     1. LLaMa 7b (~25 GB): `git clone https://huggingface.co/decapoda-research/llama-7b-hf`
+    git clone git clone https://huggingface.co/baffo32/decapoda-research-llama-7B-hf
     2. LLaMa 13b (~75 GB): `git clone https://huggingface.co/decapoda-research/llama-13b-hf`
     3. LLaMa 65b (~244 GB): `git clone https://huggingface.co/decapoda-research/llama-65b-hf`
 
@@ -30,7 +31,7 @@ Here is the 7b model running on an A10 GPU:
 2. (Optional, requires 1.) Run `source <my_env_name>\bin\activate` (or `<my_env_name>\Scripts\activate` if on Windows) to activate the environment
 3. Run `pip install numpy torch`
 4. Run `python convert.py` to convert the model weights to rust understandable format:
-    a. LLaMa 7b: `python convert.py`
+    a. LLaMa 7b: `python convert.py llama-7B-hf`
     b. LLaMa 13b: `python convert.py llama-13b-hf`
     c. LLaMa 65b: `python convert.py llama-65b-hf`
 

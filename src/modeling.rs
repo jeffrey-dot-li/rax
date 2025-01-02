@@ -12,7 +12,7 @@ use dfdx::{
 
 pub const VOCAB: usize = 32_000;
 pub const HEAD_DIM: usize = 128;
-pub const HEAD_DIM_OVER_2: usize = 64;
+pub const HEAD_DIM_OVER_2: usize = HEAD_DIM / 2;
 
 pub trait LlamaModel: Clone {
     type Hidden: ConstDim;
