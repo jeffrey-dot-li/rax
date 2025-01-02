@@ -51,6 +51,11 @@ cargo build --release
 
 ## Run the executable
 
+```
+ldd ./target/release/llama-dfdx # Check if cuda is linked
+sudo ln -s /usr/lib/x86_64-linux-gnu/libcuda.so.560.35.05 /usr/local/cuda-12.6/lib64/libcuda.so.1 # Link cuda to the expected location
+```
+
 With default args:
 ```bash
 ./target/release/llama-dfdx --model <model-dir> generate "<prompt>"
