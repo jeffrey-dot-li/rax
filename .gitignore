@@ -7,3 +7,4 @@ model
 llama-7b-hf
 llama-13b-hf
 llama-65b-hf
+.direnv
