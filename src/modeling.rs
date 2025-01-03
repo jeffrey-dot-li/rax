@@ -111,7 +111,9 @@ impl RotaryEmbedding {
         let t = device.arange(seq) + offset as f32;
         let freqs = t.matmul(inv_freq);
         let freqs = freqs.realize::<(Seq, usize)>();
-        let emb = (freqs.clone(), freqs).concat_along(Axis::<1>);
+        let emb = (freqs.clone(), freqs)
+            .try_concat_tensor_along((Axis::<1>))
+            .unwrap();
         let emb_sin = emb.clone().sin();
         let emb_cos = emb.cos();
         (
@@ -125,7 +127,13 @@ impl RotaryEmbedding {
     ) -> Tensor<(Batch, NumHeads, Seq, Const<HEAD_DIM>), f16, Dev> {
         let x1 = x.clone().slice((.., .., .., ..HEAD_DIM_OVER_2));
         let x2 = x.slice((.., .., .., HEAD_DIM_OVER_2..));
-        (-x2, x1).concat_along(Axis::<3>).realize()
+        // TODO: Handle this error? I have no idea what would cause this error rn.
+        (-x2, x1)
+            .try_concat_tensor_along(Axis::<3>)
+            .unwrap()
+            .realize()
+
+        // (-x2, x1).concat_along(Axis::<3>).realize()
     }
 }
 
